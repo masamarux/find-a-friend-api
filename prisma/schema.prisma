@@ -1,0 +1,113 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum SIZES {
+  SMALL
+  MEDIUM
+  BIG
+}
+
+enum ENERGY {
+  QUIET
+  LOW
+  MEDIUM
+  HIGH
+  UNSTOPABLE
+}
+
+enum SPECIE {
+  DOG
+  CAT
+}
+
+enum INDEPENDENCY {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum ENVIRONMENT_SIZE {
+  SMALL
+  MEDIUM
+  WIDE
+}
+
+model Org {
+  id         String   @id @default(uuid())
+  name       String
+  email      String   @unique
+  cep        String
+  address    String
+  telephone  String   @unique
+  password   String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  deleted_at DateTime @default(now())
+
+  adoptions Adoption[]
+
+  @@map("orgs")
+}
+
+model Pet {
+  id               String           @id @default(uuid())
+  name             String
+  about            String
+  age              String
+  specie           SPECIE
+  size             SIZES            @default(MEDIUM)
+  energy           ENERGY           @default(MEDIUM)
+  independency     INDEPENDENCY     @default(MEDIUM)
+  environment_size ENVIRONMENT_SIZE @default(MEDIUM)
+  created_at       DateTime         @default(now())
+  updated_at       DateTime         @updatedAt
+  adopted_at       DateTime         @default(now())
+
+  adoption   Adoption?
+  pet_images PetImages[]
+
+  @@map("pets")
+}
+
+model Adoption {
+  id         String   @id @default(uuid())
+  org_id     String
+  pet_id     String   @unique
+  created_at DateTime @default(now())
+  deleted_at DateTime @default(now())
+
+  org                   Org                   @relation(fields: [org_id], references: [id])
+  pet                   Pet                   @relation(fields: [pet_id], references: [id])
+  adoption_requirements AdoptionRequirement[]
+
+  @@map("adoptions")
+}
+
+model AdoptionRequirement {
+  id          String @id @default(uuid())
+  adoption_id String
+  description String
+
+  adoption Adoption @relation(fields: [adoption_id], references: [id])
+
+  @@map("adoption_requirements")
+}
+
+model PetImages {
+  id     String @id @default(uuid())
+  pet_id String
+  url    String
+
+  pet Pet @relation(fields: [pet_id], references: [id])
+
+  @@map("pet_images")
+}
