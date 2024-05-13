@@ -1,6 +1,15 @@
 import { PetsRepository } from '@/repositories/pets-repository';
 import { $Enums, Pet } from '@prisma/client';
 
+export interface Address {
+  cep: string;
+  street: string;
+  number: string;
+  neighborhood: string;
+  city: string;
+  state: string;
+}
+
 interface RegisterPetUseCaseRequest {
   name: string;
   about: string;
@@ -10,6 +19,7 @@ interface RegisterPetUseCaseRequest {
   energy: $Enums.ENERGY;
   independency: $Enums.INDEPENDENCY;
   environment_size: $Enums.ENVIRONMENT_SIZE;
+  address: Address
 }
 
 interface RegisterPetUseCaseResponse {

@@ -1,11 +1,15 @@
-// import { PetsRepository } from '@/repositories/pets-repository';
+import { PetsRepository } from '@/repositories/pets-repository';
 
-// export class FetchPetsUseCase {
-//   constructor(private petsRepository: PetsRepository) {}
+interface FetchPetsUseCaseRequest {
+  cityName: string;
+}
 
-//   async execute() {
-//     const pets = await this.petsRepository.findManyByCity();
+export class FetchPetsUseCase {
+  constructor(private petsRepository: PetsRepository) {}
 
-//     return pets;
-//   }
-// }
+  async execute(data: FetchPetsUseCaseRequest){
+    const pets = await this.petsRepository.findManyByCity(data.cityName);
+
+    return pets;
+  }
+}

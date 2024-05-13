@@ -42,18 +42,18 @@ enum ENVIRONMENT_SIZE {
 }
 
 model Org {
-  id         String   @id @default(uuid())
+  id         String     @id @default(uuid())
   name       String
-  email      String   @unique
+  email      String     @unique
   cep        String
-  address    String
-  telephone  String   @unique
+  address_id String
+  telephone  String     @unique
   password   String
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  deleted_at DateTime @default(now())
-
-  adoptions Adoption[]
+  created_at DateTime   @default(now())
+  updated_at DateTime   @updatedAt
+  deleted_at DateTime   @default(now())
+  adoptions  Adoption[]
+  address    Address    @relation(fields: [address_id], references: [id])
 
   @@map("orgs")
 }
@@ -68,23 +68,39 @@ model Pet {
   energy           ENERGY           @default(MEDIUM)
   independency     INDEPENDENCY     @default(MEDIUM)
   environment_size ENVIRONMENT_SIZE @default(MEDIUM)
+  address_id       String
   created_at       DateTime         @default(now())
   updated_at       DateTime         @updatedAt
   adopted_at       DateTime         @default(now())
-
-  adoption   Adoption?
-  pet_images PetImages[]
+  adoption         Adoption?
+  pet_images       PetImages[]
+  address          Address          @relation(fields: [address_id], references: [id])
 
   @@map("pets")
 }
 
-model Adoption {
-  id         String   @id @default(uuid())
-  org_id     String
-  pet_id     String   @unique
-  created_at DateTime @default(now())
-  deleted_at DateTime @default(now())
+model Address {
+  id           String   @id @default(uuid())
+  cep          String
+  street       String
+  number       String
+  neighborhood String
+  city         String
+  state        String
+  created_at   DateTime @default(now())
+  deleted_at   DateTime @default(now())
+  Org          Org[]
+  Pet          Pet[]
 
+  @@map("addresses")
+}
+
+model Adoption {
+  id                    String                @id @default(uuid())
+  org_id                String
+  pet_id                String                @unique
+  created_at            DateTime              @default(now())
+  deleted_at            DateTime              @default(now())
   org                   Org                   @relation(fields: [org_id], references: [id])
   pet                   Pet                   @relation(fields: [pet_id], references: [id])
   adoption_requirements AdoptionRequirement[]
@@ -93,11 +109,10 @@ model Adoption {
 }
 
 model AdoptionRequirement {
-  id          String @id @default(uuid())
+  id          String   @id @default(uuid())
   adoption_id String
   description String
-
-  adoption Adoption @relation(fields: [adoption_id], references: [id])
+  adoption    Adoption @relation(fields: [adoption_id], references: [id])
 
   @@map("adoption_requirements")
 }
@@ -106,8 +121,7 @@ model PetImages {
   id     String @id @default(uuid())
   pet_id String
   url    String
-
-  pet Pet @relation(fields: [pet_id], references: [id])
+  pet    Pet    @relation(fields: [pet_id], references: [id])
 
   @@map("pet_images")
 }
