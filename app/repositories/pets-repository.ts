@@ -1,4 +1,4 @@
-import { $Enums, Pet as PetModel } from '@prisma/client';
+import { $Enums, ENERGY, ENVIRONMENT_SIZE, INDEPENDENCY, Pet as PetModel, SIZES, SPECIE } from '@prisma/client';
 
 export interface Address {
   cep: string;
@@ -21,7 +21,17 @@ export interface Pet {
   address: Address
 }
 
+export interface FindManyByCityProps {
+  specie?: SPECIE
+  size?: SIZES
+  energy?: ENERGY
+  independency?: INDEPENDENCY
+  environmentSize?: ENVIRONMENT_SIZE
+  city: string
+}
+
 export interface PetsRepository {
-  findManyByCity(cityName: string): Promise<PetModel[]>;
+  findById(id: string): Promise<PetModel | null>;
+  findMany(data: FindManyByCityProps): Promise<PetModel[] | null>;
   create(data: Pet): Promise<PetModel>;
 }

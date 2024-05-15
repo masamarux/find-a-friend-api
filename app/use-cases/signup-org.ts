@@ -1,4 +1,6 @@
+import { env } from '@/env';
 import { OrgRepository } from '@/repositories/org-repository';
+import { hash } from 'bcryptjs';
 import { Address } from './register-pet'; // acho q vou ter q generalizar essas tipagens
 
 interface SignupOrgUseCaseRequest {
@@ -20,10 +22,15 @@ export class SignupOrgUseCase {
       throw new Error('Org already exists');
     }
 
-    // criptografar senha
+    const passwordHash = await hash(data.password, env.CRYPTO_SALT);
 
-    const org = await this.orgRepository.create(data);
+    const org = await this.orgRepository.create({
+      ...data,
+      password: passwordHash,
+    });
 
-    return org;
+    return {
+      org
+    };
   }
 }

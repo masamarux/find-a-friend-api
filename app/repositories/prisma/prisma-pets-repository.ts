@@ -1,15 +1,36 @@
 import { prisma } from '@/libs/prisma';
-import { Pet, PetsRepository } from '../pets-repository';
+import { FindManyByCityProps, Pet, PetsRepository } from '../pets-repository';
 
 export class PrismaPetsRepository implements PetsRepository {
-  async findManyByCity(cityName: string) {
+  async findById(id: string) {
+    const pet = await prisma.pet.findUnique({
+      where: {
+        id
+      }
+    })
+    return pet
+  }
+  async findMany(data: FindManyByCityProps) {
+    const {
+      city,
+      energy,
+      environmentSize,
+      independency,
+      size,
+      specie
+    } = data
     const pets = await prisma.pet.findMany({
       include: {
         address: true
       },
       where: {
+        specie,
+        size,
+        energy,
+        independency,
+        environment_size: environmentSize,
         address: {
-          city: cityName
+          city
         }
       }
     })

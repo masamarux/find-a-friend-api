@@ -1,4 +1,5 @@
 import { OrgRepository } from '@/repositories/org-repository';
+import { compare } from 'bcryptjs';
 
 interface SigninOrgUseCaseRequest {
   email: string
@@ -8,8 +9,11 @@ interface SigninOrgUseCaseRequest {
 export class SigninOrgUseCase {
   constructor(private orgRepository: OrgRepository) {}
 
-  async execute(data: SigninOrgUseCaseRequest) {
-    const org = await this.orgRepository.findByEmail(data.email);
+  async execute({
+    email,
+    password
+  }: SigninOrgUseCaseRequest) {
+    const org = await this.orgRepository.findByEmail(email);
 
     if (!org) {
       throw new Error('Org not found');
@@ -17,6 +21,14 @@ export class SigninOrgUseCase {
 
     // verificar senha
 
-    return org;
+    const passwordMatch = await compare(password, org.password);
+
+    if (!passwordMatch) {
+      throw new Error('Invalid password');
+    }
+
+    return {
+      org
+    };
   }
 }
