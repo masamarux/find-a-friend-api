@@ -19,8 +19,8 @@
 ## Requisitos não funcionais
 - [x] Os dados devem estar persistidos num banco de dados Postgres
 - [x] Senhas devem ser criptografadas
-- [ ] O usuário deve ser autenticado com um JWT
+- [x] O usuário deve ser autenticado com um JWT
 - [ ] Os dados devem estar paginado com padrào de 10 itens
 - [ ] A aplicação deve ter testes unitários e E2E
 - [ ] A aplicação deve utilizar um sistema de logs
-- [ ] As rotas devem validar os dados da requisição
+- [x] As rotas devem validar os dados da requisição
