@@ -1,7 +1,8 @@
 import { Org as OrgModel, Prisma} from '@prisma/client';
-import { Address } from './pets-repository';
+
+export type OrgCreateInput = Prisma.XOR<Prisma.OrgCreateInput,Prisma.OrgUncheckedCreateInput>
 
 export interface OrgRepository {
-  create: (data: Prisma.OrgUncheckedCreateInput) => Promise<void>
+  create: (data: OrgCreateInput) => Promise<OrgModel>
   findByEmail: (email: string) => Promise<OrgModel | null>
 }

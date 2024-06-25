@@ -19,8 +19,6 @@ export class SigninOrgUseCase {
       throw new Error('Org not found');
     }
 
-    // verificar senha
-
     const passwordMatch = await compare(password, org.password);
 
     if (!passwordMatch) {

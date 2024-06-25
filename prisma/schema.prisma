@@ -21,7 +21,7 @@ enum ENERGY {
   LOW
   MEDIUM
   HIGH
-  UNSTOPABLE
+  UNSTOPPABLE
 }
 
 enum SPECIE {
@@ -45,7 +45,6 @@ model Org {
   id         String     @id @default(uuid())
   name       String
   email      String     @unique
-  cep        String
   address_id String
   telephone  String     @unique
   password   String
@@ -62,7 +61,7 @@ model Pet {
   id               String           @id @default(uuid())
   name             String
   about            String
-  age              String
+  age              Int
   specie           SPECIE
   size             SIZES            @default(MEDIUM)
   energy           ENERGY           @default(MEDIUM)
@@ -120,7 +119,7 @@ model AdoptionRequirement {
 model PetImages {
   id     String @id @default(uuid())
   pet_id String
-  url    String
+  key    String
   pet    Pet    @relation(fields: [pet_id], references: [id])
 
   @@map("pet_images")

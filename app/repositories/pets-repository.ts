@@ -12,13 +12,14 @@ export interface Address {
 export interface Pet {
   name: string;
   about: string;
-  age: string;
+  age: number;
   specie: $Enums.SPECIE;
   size: $Enums.SIZES;
   energy: $Enums.ENERGY;
   independency: $Enums.INDEPENDENCY;
   environment_size: $Enums.ENVIRONMENT_SIZE;
-  address: Address
+  address: Address,
+  images: string[]
 }
 
 export interface FindManyByCityProps {

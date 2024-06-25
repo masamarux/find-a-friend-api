@@ -1,12 +1,14 @@
 import { Prisma } from '@prisma/client';
-import { OrgRepository } from '../org-repository';
+import { OrgCreateInput, OrgRepository } from '../org-repository';
 import { prisma } from '@/libs/prisma';
 
 export class PrismaOrgRepository implements OrgRepository {
-  async create(data: Prisma.OrgUncheckedCreateInput) {
-    await prisma.org.create({
+  async create(data: OrgCreateInput) {
+    const org = await prisma.org.create({
       data
     });
+
+    return org;
   }
 
   async findByEmail(email: string) {

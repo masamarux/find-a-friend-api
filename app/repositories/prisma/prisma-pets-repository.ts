@@ -42,7 +42,20 @@ export class PrismaPetsRepository implements PetsRepository {
         ...data,
         address: {
           create: data.address
+        },
+        pet_images: {
+          createMany: {
+            data: data.images.map(key => {
+              return {
+                key
+              }
+            })
+          }
         }
+      },
+      include: {
+        address: true,
+        pet_images: true
       }
     })
 
