@@ -6,6 +6,23 @@ export class PrismaPetsRepository implements PetsRepository {
     const pet = await prisma.pet.findUnique({
       where: {
         id
+      },
+      include: {
+        pet_images: true,
+        address: true,
+        adoption: {
+          include: {
+            org: {
+              select: {
+                address: true,
+                telephone: true,
+                name: true,
+                id: true
+              }
+            },
+            adoption_requirements: true
+          }
+        }
       }
     })
     return pet

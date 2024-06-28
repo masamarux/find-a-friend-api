@@ -5,6 +5,7 @@ import { z } from 'zod';
 export async function register(request: FastifyRequest, reply: FastifyReply) {
   try {
     const registerPetSchema = z.object({
+      orgId: z.string(),
       name: z.string(),
       about: z.string(),
       age: z.number(),
@@ -21,6 +22,7 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
         city: z.string(),
         state: z.string(),
       }),
+      requirements: z.array(z.string()).min(1),
     })
     const result = registerPetSchema.safeParse(request.body);
 
@@ -29,6 +31,7 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
     }
 
     const {
+      orgId,
       name,
       about,
       age,
@@ -38,6 +41,7 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
       independency,
       environmentSize,
       address,
+      requirements
     } = result.data
     const parts = request.files()
     const files: Buffer[] = []
@@ -49,6 +53,7 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
     const registerPetUseCase = makeRegisterPet();
 
     const pet = await registerPetUseCase.execute({
+      orgId,
       name,
       about,
       age,
@@ -59,6 +64,7 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
       environmentSize,
       address,
       files,
+      requirements
     });
 
     return reply.status(201).send({

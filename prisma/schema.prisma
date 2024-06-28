@@ -42,17 +42,17 @@ enum ENVIRONMENT_SIZE {
 }
 
 model Org {
-  id         String     @id @default(uuid())
+  id         String      @id @default(uuid())
   name       String
-  email      String     @unique
+  email      String      @unique
   address_id String
-  telephone  String     @unique
+  telephone  String      @unique
   password   String
-  created_at DateTime   @default(now())
-  updated_at DateTime   @updatedAt
-  deleted_at DateTime   @default(now())
-  adoptions  Adoption[]
-  address    Address    @relation(fields: [address_id], references: [id])
+  created_at DateTime    @default(now())
+  updated_at DateTime    @updatedAt
+  deleted_at DateTime    @default(now())
+  adoptions  Adoptions[]
+  address    Address     @relation(fields: [address_id], references: [id])
 
   @@map("orgs")
 }
@@ -71,7 +71,7 @@ model Pet {
   created_at       DateTime         @default(now())
   updated_at       DateTime         @updatedAt
   adopted_at       DateTime         @default(now())
-  adoption         Adoption?
+  adoption         Adoptions?
   pet_images       PetImages[]
   address          Address          @relation(fields: [address_id], references: [id])
 
@@ -94,12 +94,12 @@ model Address {
   @@map("addresses")
 }
 
-model Adoption {
+model Adoptions {
   id                    String                @id @default(uuid())
   org_id                String
   pet_id                String                @unique
   created_at            DateTime              @default(now())
-  deleted_at            DateTime              @default(now())
+  finished_at           DateTime              @default(now())
   org                   Org                   @relation(fields: [org_id], references: [id])
   pet                   Pet                   @relation(fields: [pet_id], references: [id])
   adoption_requirements AdoptionRequirement[]
@@ -108,10 +108,10 @@ model Adoption {
 }
 
 model AdoptionRequirement {
-  id          String   @id @default(uuid())
+  id          String    @id @default(uuid())
   adoption_id String
   description String
-  adoption    Adoption @relation(fields: [adoption_id], references: [id])
+  adoption    Adoptions @relation(fields: [adoption_id], references: [id])
 
   @@map("adoption_requirements")
 }

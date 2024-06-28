@@ -1,3 +1,4 @@
+import { AdoptionsRepository } from '@/repositories/adoptions-repository';
 import { PetsRepository } from '@/repositories/pets-repository';
 import type { S3Service } from '@/services/s3';
 import { $Enums, Pet } from '@prisma/client';
@@ -13,6 +14,7 @@ export interface Address {
 }
 
 interface RegisterPetUseCaseRequest {
+  orgId: string;
   name: string;
   about: string;
   age: number;
@@ -23,6 +25,7 @@ interface RegisterPetUseCaseRequest {
   environmentSize: $Enums.ENVIRONMENT_SIZE;
   address: Address,
   files: Buffer[]
+  requirements: string[]
 }
 
 interface RegisterPetUseCaseResponse {
@@ -32,6 +35,7 @@ interface RegisterPetUseCaseResponse {
 export class RegisterPetUseCase {
   constructor(
     private petsRepository: PetsRepository,
+    private adoptionsRepository: AdoptionsRepository,
     private s3Service: S3Service,
   ) {}
 
@@ -55,6 +59,12 @@ export class RegisterPetUseCase {
       address: data.address,
       images,
     });
+
+    await this.adoptionsRepository.create({
+      orgId: data.orgId,
+      petId: pet.id,
+      requirements: data.requirements,
+    })
 
     return {
       pet
