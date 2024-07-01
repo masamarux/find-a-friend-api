@@ -35,9 +35,9 @@
 - [x] Deve falhar ao cadastrar uma org já existente
 - [x] Deve senha deve ser um hash correto ao cadastrar
 ### signin-org
-- [] Deve logar corretamente
-- [] Deve falhar caso não tenha cadastro
-- [] Deve falhar caso a senha esteja incorreta
+- [x] Deve logar corretamente
+- [x] Deve falhar caso não tenha cadastro
+- [x] Deve falhar caso a senha esteja incorreta
 ### register-pet
 - [] Deve cadastrar corretamente o pet
 - [] As imagens devem estar inseridas corretamente no cdn
@@ -55,15 +55,11 @@
 - [] Deve falhar caso enviado parametros incorretos
 ### /orgs/sessions
 - [] Deve retornar um jwt corretamente
-- [] Deve retornar um cookie com refresh token corretamente
-- [] Deve falhar caso enviado parametros incorretos
 ### /pets
 - [] Deve falhar se não logado
 - [] Deve cadastrar um pet corretamente
-- [] Deve falhar caso enviado parametros incorretos
 ### /pets/:id
 - [] Deve falhar ao não enviar um id de pet
 - [] Deve retornar um pet existente
 ### /adoptions
 - [] Deve ter o tamanho de itens padrão de 10 por página
-- [] Deve falhar caso enviado parametros incorretos

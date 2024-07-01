@@ -26,7 +26,7 @@ export class SignupOrgUseCase {
     const orgAlreadyExists = await this.orgRepository.findByEmail(data.email);
 
     if (orgAlreadyExists) {
-      throw new EntityAlreadyExistsError()
+      throw new EntityAlreadyExistsError('Organization');
     }
 
     const passwordHash = await hash(password, env.CRYPTO_SALT);

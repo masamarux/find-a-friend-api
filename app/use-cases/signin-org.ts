@@ -1,3 +1,5 @@
+import { EntityNotFoundError } from '@/errors/entity-not-found-error';
+import { InvalidCredentialsError } from '@/errors/invalid-credentials-error';
 import { OrgRepository } from '@/repositories/org-repository';
 import { compare } from 'bcryptjs';
 
@@ -16,13 +18,13 @@ export class SigninOrgUseCase {
     const org = await this.orgRepository.findByEmail(email);
 
     if (!org) {
-      throw new Error('Org not found');
+      throw new InvalidCredentialsError();
     }
 
     const passwordMatch = await compare(password, org.password);
 
     if (!passwordMatch) {
-      throw new Error('Invalid password');
+      throw new InvalidCredentialsError();
     }
 
     return {

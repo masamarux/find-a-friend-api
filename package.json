@@ -4,7 +4,9 @@
   "description": "",
   "main": "./app/server.ts",
   "scripts": {
-    "start:dev": "tsx watch ./app/server.ts"
+    "start:dev": "tsx watch ./app/server.ts",
+    "test:unit": "vitest run --dir app/use-cases",
+    "test:unit:watch": "vitest --dir app/use-cases"
   },
   "keywords": [],
   "author": "",
