@@ -8,8 +8,8 @@ export async function list(request: FastifyRequest, reply: FastifyReply) {
       orgId: z.string(),
     })
     const listQuerySchema = z.object({
-      page: z.coerce.number(),
-      itemsSize: z.coerce.number(),
+      page: z.coerce.number().default(1),
+      itemsSize: z.coerce.number().default(10),
       age: z.coerce.number().optional(),
       size: z.enum(['SMALL', 'MEDIUM', 'BIG']).optional(),	
       specie: z.enum(['DOG', 'CAT']).optional(),
@@ -19,7 +19,7 @@ export async function list(request: FastifyRequest, reply: FastifyReply) {
       address: z.object({
         city: z.string(),
         state: z.string(),
-      }).optional(),
+      }),
     })
 
     const resultParams = listParamsSchema.safeParse(request.params);

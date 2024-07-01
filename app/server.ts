@@ -8,5 +8,5 @@ app.listen({
   if (err) {
     console.error(err);
   }
-  console.log(`Server listening at ${address}`);
+  return `Server listening at ${address}`;
 })

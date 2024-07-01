@@ -35,7 +35,7 @@ export async function signup(request: FastifyRequest, reply: FastifyReply) {
 
     const signupOrgUseCase = makeSignupOrg();
 
-    const org = await signupOrgUseCase.execute({
+    const { org } = await signupOrgUseCase.execute({
       name,
       email,
       address,
@@ -43,7 +43,13 @@ export async function signup(request: FastifyRequest, reply: FastifyReply) {
       password,
     });
 
-    return reply.status(201).send(org);
+    return reply.status(201).send({
+      org: {
+        name: org.name,
+        email: org.email,
+        telephone: org.telephone,
+      }
+    });
   } catch (error: any) {
     return reply.status(400).send({ message: error.message });
   }

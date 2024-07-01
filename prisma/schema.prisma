@@ -50,7 +50,7 @@ model Org {
   password   String
   created_at DateTime    @default(now())
   updated_at DateTime    @updatedAt
-  deleted_at DateTime    @default(now())
+  deleted_at DateTime?
   adoptions  Adoptions[]
   address    Address     @relation(fields: [address_id], references: [id])
 
@@ -79,15 +79,15 @@ model Pet {
 }
 
 model Address {
-  id           String   @id @default(uuid())
+  id           String    @id @default(uuid())
   cep          String
   street       String
   number       String
   neighborhood String
   city         String
   state        String
-  created_at   DateTime @default(now())
-  deleted_at   DateTime @default(now())
+  created_at   DateTime  @default(now())
+  deleted_at   DateTime?
   Org          Org[]
   Pet          Pet[]
 
@@ -99,7 +99,7 @@ model Adoptions {
   org_id                String
   pet_id                String                @unique
   created_at            DateTime              @default(now())
-  finished_at           DateTime              @default(now())
+  finished_at           DateTime?
   org                   Org                   @relation(fields: [org_id], references: [id])
   pet                   Pet                   @relation(fields: [pet_id], references: [id])
   adoption_requirements AdoptionRequirement[]

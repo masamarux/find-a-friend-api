@@ -5,7 +5,22 @@ import { prisma } from '@/libs/prisma';
 export class PrismaOrgRepository implements OrgRepository {
   async create(data: OrgCreateInput) {
     const org = await prisma.org.create({
-      data
+      data: {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        telephone: data.telephone,
+        address: {
+          create: {
+            cep: data.address.cep,
+            city: data.address.city,
+            neighborhood: data.address.neighborhood,
+            number: data.address.number,
+            state: data.address.state,
+            street: data.address.street,
+          }
+        }
+      }
     });
 
     return org;

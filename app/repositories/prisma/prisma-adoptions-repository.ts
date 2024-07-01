@@ -34,6 +34,9 @@ export class PrismaAdoptionsRepository implements AdoptionsRepository {
     const adoptions = await prisma.adoptions.findMany({
       where: {
         org_id: orgId,
+        finished_at: {
+          not: null
+        },
         pet: {
           age,
           size,

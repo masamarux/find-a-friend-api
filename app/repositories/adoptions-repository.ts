@@ -3,7 +3,7 @@ interface AdoptionsList {
   org_id: string;
   pet_id: string;
   created_at: Date;
-  finished_at: Date;
+  finished_at: Date | null;
   pet: {
     id: string;
     name: string;

@@ -2,6 +2,7 @@ import { env } from '@/env';
 import { OrgRepository } from '@/repositories/org-repository';
 import { hash } from 'bcryptjs';
 import { Address } from './register-pet'; // acho q vou ter q generalizar essas tipagens
+import { EntityAlreadyExistsError } from '@/errors/entity-already-exists-error';
 
 interface SignupOrgUseCaseRequest {
   name: string
@@ -25,7 +26,7 @@ export class SignupOrgUseCase {
     const orgAlreadyExists = await this.orgRepository.findByEmail(data.email);
 
     if (orgAlreadyExists) {
-      throw new Error('Org already exists');
+      throw new EntityAlreadyExistsError()
     }
 
     const passwordHash = await hash(password, env.CRYPTO_SALT);
@@ -35,17 +36,11 @@ export class SignupOrgUseCase {
       email,
       password: passwordHash,
       telephone,
-      address: {
-        create: address
-      },
+      address,
     });
 
     return {
-      org: {
-        name: org.name,
-        email: org.email,
-        telephone: org.telephone,
-      }
+      org
     };
   }
 }

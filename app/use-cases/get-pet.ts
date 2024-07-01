@@ -12,6 +12,10 @@ export class GetPetUseCase {
   }: FetchPetsUseCaseRequest){
     const pet = await this.petsRepository.findById(id);
 
+    if(!pet) {
+      throw new Error('Pet not found');
+    }
+
     return {
       pet
     };

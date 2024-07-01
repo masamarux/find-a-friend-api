@@ -10,7 +10,7 @@ interface FetchAdoptionsUseCaseProps {
   energy?: 'QUIET' | 'LOW' | 'MEDIUM' | 'HIGH' | 'UNSTOPPABLE'
   independency?: 'LOW' | 'MEDIUM' | 'HIGH'
   environmentSize?: 'SMALL' | 'MEDIUM' | 'WIDE'
-  address?: {
+  address: {
     city: string
     state: string
   }
