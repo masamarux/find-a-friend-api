@@ -46,8 +46,8 @@
 - [] Deve falhar caso retorne um pet inexistente
 - [] Deve retornar fotos do pet com link
 ### fetch-adoptions
-- [] Deve retornar lista de dados de pet existentes
-- [] Deve ser capaz de retornar uma lista vazia caso não existam itens
+- [x] Deve retornar lista de adoções existentes
+- [x] Deve ser capaz de retornar uma lista vazia caso não existam itens
 
 ## Lista testes E2E
 ### /orgs/signup
