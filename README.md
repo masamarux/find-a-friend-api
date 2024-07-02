@@ -24,8 +24,9 @@
 - [x] O usuário deve ser autenticado com um JWT
 - [] O sistema de autenticação deve utilizar RBAC
 - [x] Os dados devem estar paginados com padrão de 10 itens
-- [] A aplicação deve ter testes unitários e E2E
-- [] A aplicação deve entregar erros padronizados
+- [x] A aplicação deve ter testes unitários
+- [] A aplicação deve ter testes E2E
+- [x] A aplicação deve entregar erros padronizados e personalizados
 - [x] A aplicação deve utilizar um sistema de logs
 - [x] As rotas devem validar os dados da requisição
 
@@ -39,12 +40,10 @@
 - [x] Deve falhar caso não tenha cadastro
 - [x] Deve falhar caso a senha esteja incorreta
 ### register-pet
-- [] Deve cadastrar corretamente o pet
-- [] As imagens devem estar inseridas corretamente no cdn
+- [x] Deve cadastrar corretamente o pet
 ### get-pet
-- [] Deve retornar dados de um pet existente
-- [] Deve falhar caso retorne um pet inexistente
-- [] Deve retornar fotos do pet com link
+- [x] Deve retornar dados de um pet existente
+- [x] Deve falhar caso retorne um pet inexistente
 ### fetch-adoptions
 - [x] Deve retornar lista de adoções existentes
 - [x] Deve ser capaz de retornar uma lista vazia caso não existam itens

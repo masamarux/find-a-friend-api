@@ -13,7 +13,7 @@ export interface Address {
   state: string;
 }
 
-interface RegisterPetUseCaseRequest {
+export interface RegisterPetUseCaseRequest {
   orgId: string;
   name: string;
   about: string;

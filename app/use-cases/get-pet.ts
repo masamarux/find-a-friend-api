@@ -1,3 +1,4 @@
+import { EntityNotFoundError } from '@/errors/entity-not-found-error';
 import { PetsRepository } from '@/repositories/pets-repository';
 
 interface FetchPetsUseCaseRequest {
@@ -13,7 +14,7 @@ export class GetPetUseCase {
     const pet = await this.petsRepository.findById(id);
 
     if(!pet) {
-      throw new Error('Pet not found');
+      throw new EntityNotFoundError('Pet');
     }
 
     return {
