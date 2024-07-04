@@ -11,7 +11,7 @@ This is a Node.js API that provides an API for adopt a pet service. The applicat
 Create a .env file in the root directory of the project and add the following environment variables:
 ```bash
 # Application settings
-NODE_ENV=production
+NODE_ENV=dev
 PORT=3000
 
 # Database settings
