@@ -1,64 +1,74 @@
 # Find a friend api
 
-## Requisitos Funcionais
-- [x] Deve ser possível cadastrar um pet
-- [x] Deve ser possível listar todos os pets disponíveis para adoção em uma cidade
-- [x] Deve ser possível filtrar pets por suas características
-- [x] Deve ser possível visualizar detalhes de um pet para adoção
-- [x] Deve ser possível se cadastrar como uma ORG
-- [x] Deve ser possível realizar login como uma ORG
+This is a Node.js API that provides an API for adopt a pet service. The application uses TypeScript, Docker, and PostgreSQL.
 
-## Regras de negócio
-- [x] Para listar os pets, obrigatoriamente precisamos informar a cidade
-- [x] Uma ORG precisa ter um endereço e um número de WhatsApp
-- [x] Um pet deve estar ligado a uma ORG
-- [x] O usuário que quer adotar, entrará em contato com a ORG via WhatsApp
-- [x] Todos os filtros, além da cidade, são opcionais
-- [] Para uma ORG acessar a aplicação como admin, ela precisa estar logada // ligar com o rbca
-- [x] Fotos dos pets devem ser guardadas num serviço de cdn
+## Prerequisites
+- Docker and Docker Compose installed on your machine
+- Node.js and npm/yarn/pnpm installed on your machine
 
-## Requisitos não funcionais
-- [x] Os dados devem estar persistidos num banco de dados Postgres
-- [x] CDN utilizado deve ser o S3
-- [x] Senhas devem ser criptografadas
-- [x] O usuário deve ser autenticado com um JWT
-- [] O sistema de autenticação deve utilizar RBAC
-- [x] Os dados devem estar paginados com padrão de 10 itens
-- [x] A aplicação deve ter testes unitários
-- [] A aplicação deve ter testes E2E
-- [x] A aplicação deve entregar erros padronizados e personalizados
-- [x] A aplicação deve utilizar um sistema de logs
-- [x] As rotas devem validar os dados da requisição
 
-## Lista de testes unitários
-### signup-org
-- [x] Deve se cadastrar normalmente
-- [x] Deve falhar ao cadastrar uma org já existente
-- [x] Deve senha deve ser um hash correto ao cadastrar
-### signin-org
-- [x] Deve logar corretamente
-- [x] Deve falhar caso não tenha cadastro
-- [x] Deve falhar caso a senha esteja incorreta
-### register-pet
-- [x] Deve cadastrar corretamente o pet
-### get-pet
-- [x] Deve retornar dados de um pet existente
-- [x] Deve falhar caso retorne um pet inexistente
-### fetch-adoptions
-- [x] Deve retornar lista de adoções existentes
-- [x] Deve ser capaz de retornar uma lista vazia caso não existam itens
+## Setup Environment Variables
+Create a .env file in the root directory of the project and add the following environment variables:
+```bash
+# Application settings
+NODE_ENV=production
+PORT=3000
 
-## Lista testes E2E
-### /orgs/signup
-- [] Cadastro não deve retornar dados sensíveis como password
-- [] Deve falhar caso enviado parametros incorretos
-### /orgs/sessions
-- [] Deve retornar um jwt corretamente
-### /pets
-- [] Deve falhar se não logado
-- [] Deve cadastrar um pet corretamente
-### /pets/:id
-- [] Deve falhar ao não enviar um id de pet
-- [] Deve retornar um pet existente
-### /adoptions
-- [] Deve ter o tamanho de itens padrão de 10 por página
+# Database settings
+DB_USERNAME=your_db_username
+DB_PASSWORD=your_db_password
+DB_DATABASE=your_db_name
+DB_HOST=postgresql
+DB_PORT=5432
+
+# Cryptography
+CRYPTO_SALT=your_crypto_salt
+
+# JWT settings
+JWT_SECRET=your_jwt_secret
+
+# AWS settings
+AWS_ACCESS_KEY=your_aws_access_key
+AWS_SECRET_KEY=your_aws_secret_key
+AWS_REGION=your_aws_region
+AWS_BUCKET=your_aws_bucket
+```
+
+## Building and Running the Application
+### To start the aplication in development mode with hot reloading
+Install all dependencies:
+```bash
+npm i
+```
+To start the application:
+```bash
+npm run start:dev
+```
+To build the application:
+```bash
+npm run build
+```
+### Build the application with docker
+Just run:
+```bash
+docker-compose up --build -d
+```
+## Docker Explanation
+### This project is made to work isolated with docker container while uses optimized images to reduce storage size and increase security by having less vulnerabilities.
+### The project has:
+- A Dockerfile to create the api image by using alpine image, multi stage build and a cleaning on not needed files.
+- A docker-compose.yml to orchestrate the services, a postgresql and the api itself, has a volume to persist database and network to maintain the aplication isolated from outside and using environment variables for sensitive info.
+## Technologies Used
+- Node.js;
+- TypeScript;
+- Fastify;
+- Docker;
+- Docker Compose;
+- PostgreSQL;
+- Vitest;
+- Prisma;
+- Zod.
+
+## Additional Notes
+- Make sure to replace placeholder values in the .env file with actual values.
+- Ensure that Docker and Docker Compose are installed and running on your machine before starting the application.

@@ -5,6 +5,8 @@
   "main": "./app/server.ts",
   "scripts": {
     "start:dev": "tsx watch ./app/server.ts",
+    "build": "tsup app --out-dir dist/app",
+    "start:prod": "node ./dist/app/server.js",
     "test:unit": "vitest run --dir app/use-cases",
     "test:unit:watch": "vitest --dir app/use-cases"
   },
@@ -16,6 +18,7 @@
     "@types/node": "20.10.6",
     "eslint": "^8.56.0",
     "prisma": "^5.7.1",
+    "tsup": "^8.1.0",
     "tsx": "4.7.0",
     "typescript": "5.3.3",
     "vite-tsconfig-paths": "^4.3.2",

@@ -1,11 +1,49 @@
-version: '3'
+version: '3.7'
 
 services:
-  find-a-friend-pg:
-    image: bitnami/postgresql
+  postgresql:
+    image: bitnami/postgresql:16.3.0
+    container_name: postgresql
     ports:
-      - 5432:5432
+      - 5432:${DB_PORT}
     environment:
-      - POSTGRESQL_USERNAME=postgres
-      - POSTGRESQL_PASSWORD=postgres
-      - POSTGRESQL_DATABASE=find-a-friend
+      - POSTGRESQL_USERNAME=${DB_USERNAME}
+      - POSTGRESQL_PASSWORD=${DB_PASSWORD}
+      - POSTGRESQL_DATABASE=${DB_DATABASE}
+    networks:
+      - main-network
+    volumes:
+      - db:/bitnami/postgresql
+
+  find-a-friend-api:
+    build:
+      context: .
+    container_name: find-a-friend-api
+    ports:
+      - 3000:${PORT}
+    environment:
+      - NODE_ENV=production
+      - PORT=${PORT}
+      - CRYPTO_SALT=${CRYPTO_SALT}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - JWT_SECRET=${JWT_SECRET}
+      - AWS_ACCESS_KEY=${AWS_ACCESS_KEY}
+      - AWS_SECRET_KEY=${AWS_SECRET_KEY}
+      - AWS_REGION=${AWS_REGION}
+      - AWS_BUCKET=${AWS_BUCKET}
+    depends_on:
+      - postgresql
+    networks:
+      - main-network
+
+networks:
+  main-network:
+    name: main-network
+    driver: bridge
+
+volumes:
+  db:
