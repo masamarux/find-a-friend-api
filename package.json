@@ -3,12 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "main": "./app/server.ts",
+  "type": "module",
   "scripts": {
     "start:dev": "tsx watch ./app/server.ts",
     "build": "tsup app --out-dir dist/app",
     "start:prod": "node ./dist/app/server.js",
     "test:unit": "vitest run --dir app/use-cases",
-    "test:unit:watch": "vitest --dir app/use-cases"
+    "test:unit:watch": "vitest --dir app/use-cases",
+    "test:e2e": "vitest run --dir app/http",
+    "test:e2e:watch": "vitest --dir app/http",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui"
   },
   "keywords": [],
   "author": "",
@@ -16,8 +21,10 @@
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "20.10.6",
+    "@types/supertest": "^6.0.2",
     "eslint": "^8.56.0",
     "prisma": "^5.7.1",
+    "supertest": "^7.0.0",
     "tsup": "^8.1.0",
     "tsx": "4.7.0",
     "typescript": "5.3.3",

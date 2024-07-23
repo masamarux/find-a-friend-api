@@ -47,6 +47,8 @@
 - [x] Deve ser capaz de retornar uma lista vazia caso não existam itens
 
 ## Lista testes E2E
+### /health
+- [x] Deve retornar status ok
 ### /orgs/signup
 - [] Cadastro não deve retornar dados sensíveis como password
 - [] Deve falhar caso enviado parametros incorretos
