@@ -2,6 +2,35 @@
 
 This is a Node.js API that provides an API for adopt a pet service. The application uses TypeScript, Docker, and PostgreSQL.
 
+## Functional Requirements
+- [x] Should be possible to create a pet
+- [x] Should be possible to fetch all the pets avaliable to adopt in a city
+- [x] Should be possible to filter pet by it's particularities
+- [x] Should be possible to get details of a pet for adoption
+- [x] Should be possible to register as an ORG 
+- [x] Should be possible to login as an ORG
+
+## Non-Functional Requirements
+- [x] The data must be persisted in a Postgres database
+- [x] The files must have to be stored in AWS S3
+- [x] Password must be cryptographed
+- [x] The user must be authenticated with JWT
+- [x] The auth system have to use RBAC
+- [x] The page size must be 10 items by default
+- [x] The aplication must have unit tests
+- [x] The aplication must have tests end to end
+- [x] The aplication must throw custom errors
+- [x] The aplication must have logs
+- [x] The input data must be validated on controllers
+
+## Business Rules
+- [x] To fetch pets for adoption, it must inform city info
+- [x] An ORG need to have a address and whatsapp phone number
+- [x] A pet have to be linked with an ORG  Um pet deve estar ligado a uma ORG
+- [x] The user how wants to adopt will contact the ORG via whatsapp
+- [x] All filter, besides city, are optional
+- [x] An ORG has to be ADMIN to access the aplication by login
+
 ## Prerequisites
 - Docker and Docker Compose installed on your machine
 - Node.js and npm/yarn/pnpm installed on your machine
@@ -72,3 +101,8 @@ docker-compose up --build -d
 ## Additional Notes
 - Make sure to replace placeholder values in the .env file with actual values.
 - Ensure that Docker and Docker Compose are installed and running on your machine before starting the application.
+
+## Author
+Marcelo Alves
+- <img src="https://user-images.githubusercontent.com/45273884/192056758-d7c1995b-4459-4acf-bb20-c4e19ee5daf3.svg" alt="twitter-logo" style="width: 20px; height: 20px;"> [@masamarux](https://twitter.com/masamarux)
+- <img src="https://user-images.githubusercontent.com/45273884/192056770-fa5b48e0-a216-4f55-86fc-83cc6dd3590a.svg" alt="linkedin-logo" style="width: 20px; height: 20px;"> [Marcelo Alves](https://www.linkedin.com/in/marceloalves-/)
