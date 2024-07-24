@@ -50,15 +50,12 @@
 ### /health
 - [x] Deve retornar status ok
 ### /orgs/signup
-- [] Cadastro não deve retornar dados sensíveis como password
-- [] Deve falhar caso enviado parametros incorretos
+- [X] Deve cadastrar uma ORG, retornar 201 e dados não sensíveis
 ### /orgs/sessions
 - [] Deve retornar um jwt corretamente
 ### /pets
-- [] Deve falhar se não logado
 - [] Deve cadastrar um pet corretamente
 ### /pets/:id
-- [] Deve falhar ao não enviar um id de pet
 - [] Deve retornar um pet existente
 ### /adoptions
 - [] Deve ter o tamanho de itens padrão de 10 por página

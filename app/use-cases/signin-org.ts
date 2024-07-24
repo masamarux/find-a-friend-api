@@ -1,7 +1,7 @@
 import { EntityNotFoundError } from '@/errors/entity-not-found-error';
 import { InvalidCredentialsError } from '@/errors/invalid-credentials-error';
 import { OrgRepository } from '@/repositories/org-repository';
-import { compare } from 'bcryptjs';
+import { compare } from 'bcrypt';
 
 interface SigninOrgUseCaseRequest {
   email: string

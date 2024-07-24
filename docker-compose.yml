@@ -15,34 +15,35 @@ services:
     volumes:
       - db:/bitnami/postgresql
 
-  find-a-friend-api:
-    build:
-      context: .
-    container_name: find-a-friend-api
-    ports:
-      - 3000:${PORT}
-    environment:
-      - NODE_ENV=production
-      - PORT=${PORT}
-      - CRYPTO_SALT=${CRYPTO_SALT}
-      - DB_USERNAME=${DB_USERNAME}
-      - DB_PASSWORD=${DB_PASSWORD}
-      - DB_DATABASE=${DB_DATABASE}
-      - DB_HOST=${DB_HOST}
-      - DB_PORT=${DB_PORT}
-      - JWT_SECRET=${JWT_SECRET}
-      - AWS_ACCESS_KEY=${AWS_ACCESS_KEY}
-      - AWS_SECRET_KEY=${AWS_SECRET_KEY}
-      - AWS_REGION=${AWS_REGION}
-      - AWS_BUCKET=${AWS_BUCKET}
-    depends_on:
-      - postgresql
-    networks:
-      - main-network
+  # find-a-friend-api:
+  #   build:
+  #     context: .
+  #   container_name: find-a-friend-api
+  #   ports:
+  #     - 3000:${PORT}
+  #   environment:
+  #     - NODE_ENV=production
+  #     - PORT=${PORT}
+  #     - CRYPTO_SALT=${CRYPTO_SALT}
+  #     - DB_USERNAME=${DB_USERNAME}
+  #     - DB_PASSWORD=${DB_PASSWORD}
+  #     - DB_DATABASE=${DB_DATABASE}
+  #     - DB_HOST=${DB_HOST}
+  #     - DB_PORT=${DB_PORT}
+  #     - JWT_SECRET=${JWT_SECRET}
+  #     - AWS_ACCESS_KEY=${AWS_ACCESS_KEY}
+  #     - AWS_SECRET_KEY=${AWS_SECRET_KEY}
+  #     - AWS_REGION=${AWS_REGION}
+  #     - AWS_BUCKET=${AWS_BUCKET}
+  #   depends_on:
+  #     - postgresql
+  #   networks:
+  #     - main-network
 
 networks:
   main-network:
     name: main-network
+    external: true
     driver: bridge
 
 volumes:

@@ -3,7 +3,7 @@ import { fakerPT_BR as faker } from '@faker-js/faker';
 import request from 'supertest';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
-describe('Org signup (e2e)', () => {
+describe('ORG session (e2e)', () => {
   beforeAll(async () => {
     await app.ready();
   })
@@ -12,7 +12,7 @@ describe('Org signup (e2e)', () => {
     await app.close();
   });
 
-  it('should signup a org', async () => {
+  it('should sign a session to org', async () => {
     const org = {
       name: faker.company.name(),
       email: faker.internet.email(),
@@ -30,18 +30,19 @@ describe('Org signup (e2e)', () => {
       password: faker.internet.password(),
     }
 
-    const response = await request(app.server)
+    await request(app.server)
       .post('/orgs/signup')
       .send(org)
-    
-    expect(response.status).toBe(201);
+
+    const response = await request(app.server).post('/orgs/sessions').send({
+      email: org.email,
+      password: org.password,
+    })
+
+    expect(response.status).toBe(200);
     expect(response.body).toEqual(
       expect.objectContaining({
-        org: {
-          name: org.name,
-          email: org.email,
-          telephone: org.telephone,
-        }
+        token: expect.any(String),
       })
     )
   })

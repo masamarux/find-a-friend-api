@@ -1,6 +1,6 @@
 import { env } from '@/env';
 import { OrgRepository } from '@/repositories/org-repository';
-import { hash } from 'bcryptjs';
+import { hash } from 'bcrypt';
 import { Address } from './register-pet'; // acho q vou ter q generalizar essas tipagens
 import { EntityAlreadyExistsError } from '@/errors/entity-already-exists-error';
 

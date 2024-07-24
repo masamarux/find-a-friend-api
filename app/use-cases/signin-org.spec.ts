@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { SigninOrgUseCase } from './signin-org';
 import { InMemoryOrgRepository } from '@/repositories/in-memory/in-memory-org-repository';
-import { hash } from 'bcryptjs';
+import { hash } from 'bcrypt';
 import { env } from '@/env';
 import { InvalidCredentialsError } from '@/errors/invalid-credentials-error';
 
