@@ -32,6 +32,7 @@ describe('Signup Organization', () => {
     const result = await sut.execute({
       ...org,
       address,
+      role: 'ADMIN',
     })
 
     expect(result.org).toEqual(
@@ -62,6 +63,7 @@ describe('Signup Organization', () => {
     await sut.execute({
       ...orgXYZ,
       address: addressXYZ,
+      role: 'ADMIN',
     })
 
     const addressXPTO = {
@@ -83,6 +85,7 @@ describe('Signup Organization', () => {
       () => sut.execute({
       ...orgXPTO,
       address: addressXPTO,
+      role: 'ADMIN',
       })
     ).rejects.toBeInstanceOf(EntityAlreadyExistsError)
   })
@@ -106,6 +109,7 @@ describe('Signup Organization', () => {
     const result = await sut.execute({
       ...org,
       address,
+      role: 'ADMIN',
     })
 
     const passwordHash = compare(org.password, result.org.password)

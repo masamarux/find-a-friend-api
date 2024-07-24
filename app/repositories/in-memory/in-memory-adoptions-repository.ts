@@ -40,7 +40,6 @@ export class InMemoryAdoptionsRepository implements AdoptionsRepository {
   };
 
   async listManyByOrgId({
-    orgId,
     itemsSize,
     page,
     age,
@@ -52,7 +51,6 @@ export class InMemoryAdoptionsRepository implements AdoptionsRepository {
     address,
   }: ListManyByOrgIdProps) {
     const filters: { [key: string]: any } = {
-      org_id: orgId,
       'pet.age': age,
       'pet.size': size,
       'pet.specie': specie,

@@ -15,7 +15,6 @@ interface AdoptionsList {
 }
 
 export interface ListManyByOrgIdProps {
-  orgId: string
   page: number
   itemsSize: number
   age?: number

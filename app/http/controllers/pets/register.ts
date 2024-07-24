@@ -56,7 +56,6 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
     const result = registerPetSchema.safeParse(body);
 
     if(!result.success) {
-      console.log(result.error)
       return reply.status(400).send({ message: 'Invalid data' });
     }
 

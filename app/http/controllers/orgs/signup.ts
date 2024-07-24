@@ -17,7 +17,7 @@ export async function signup(request: FastifyRequest, reply: FastifyReply) {
       }),
       telephone: z.string(),
       password: z.string(),
-      role: z.enum(['MEMBER', 'ADMIN']).optional(),
+      role: z.enum(['MEMBER', 'ADMIN']).default('MEMBER'),
     })
 
     const result = signupOrgSchema.safeParse(request.body);
@@ -32,6 +32,7 @@ export async function signup(request: FastifyRequest, reply: FastifyReply) {
       address,
       telephone,
       password,
+      role
     } = result.data
 
     const signupOrgUseCase = makeSignupOrg();
@@ -42,6 +43,7 @@ export async function signup(request: FastifyRequest, reply: FastifyReply) {
       address,
       telephone,
       password,
+      role
     });
 
     return reply.status(201).send({

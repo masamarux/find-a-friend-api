@@ -61,8 +61,6 @@ describe('Registe Pet (e2e)', () => {
       .field('requirements', JSON.stringify(pet.requirements))
       // .attach('files', Buffer.from(faker.image.dataUri()), 'image.png')
 
-
-
     expect(response.status).toBe(201);
 
     expect(response.body.pet).toEqual(

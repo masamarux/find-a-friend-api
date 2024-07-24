@@ -36,7 +36,6 @@ describe('Fetch Adoptions', () => {
     }
 
     const response = await sut.execute({
-      orgId: 'org-id-1',
       itemsSize: 10,
       page: 1,
       address: {
@@ -86,7 +85,6 @@ describe('Fetch Adoptions', () => {
     }
 
     const response = await sut.execute({
-      orgId: 'org-id-3',
       itemsSize: 10,
       page: 1,
       address: {

@@ -19,7 +19,8 @@ export class PrismaOrgRepository implements OrgRepository {
             state: data.address.state,
             street: data.address.street,
           }
-        }
+        },
+        role: data.role
       }
     });
 

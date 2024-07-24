@@ -28,6 +28,7 @@ export async function signin(request: FastifyRequest, reply: FastifyReply) {
       org: {
         id: org.id,
         name: org.name,
+        role: org.role
       }
     }, {
       sign: {
@@ -39,6 +40,7 @@ export async function signin(request: FastifyRequest, reply: FastifyReply) {
       org: {
         id: org.id,
         name: org.name,
+        role: org.role
       }
     }, {
       sign: {

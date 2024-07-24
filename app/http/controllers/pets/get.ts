@@ -17,11 +17,13 @@ export async function get(request: FastifyRequest, reply: FastifyReply) {
 
     const getPetUseCase = makeGetPet();
 
-    const pet = await getPetUseCase.execute({
+    const { pet } = await getPetUseCase.execute({
       id
     });
 
-    return reply.send(pet);
+    return reply.send({
+      pet
+    });
   } catch (error) {
     return reply.status(500).send({ message: 'Internal server error' });
   }

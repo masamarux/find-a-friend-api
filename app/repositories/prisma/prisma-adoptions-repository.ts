@@ -20,7 +20,6 @@ export class PrismaAdoptionsRepository implements AdoptionsRepository {
     });
   }
   async listManyByOrgId({
-    orgId,
     itemsSize,
     page,
     age,
@@ -33,10 +32,7 @@ export class PrismaAdoptionsRepository implements AdoptionsRepository {
   }: ListManyByOrgIdProps) {
     const adoptions = await prisma.adoptions.findMany({
       where: {
-        org_id: orgId,
-        finished_at: {
-          not: null
-        },
+        finished_at: null,
         pet: {
           age,
           size,

@@ -20,10 +20,10 @@
 - [x] CDN utilizado deve ser o S3
 - [x] Senhas devem ser criptografadas
 - [x] O usuário deve ser autenticado com um JWT
-- [] O sistema de autenticação deve utilizar RBAC
+- [x] O sistema de autenticação deve utilizar RBAC
 - [x] Os dados devem estar paginados com padrão de 10 itens
 - [x] A aplicação deve ter testes unitários
-- [] A aplicação deve ter testes E2E
+- [ ] A aplicação deve ter testes E2E
 - [x] A aplicação deve entregar erros padronizados e personalizados
 - [x] A aplicação deve utilizar um sistema de logs
 - [x] As rotas devem validar os dados da requisição
@@ -56,6 +56,6 @@
 ### /pets
 - [x] Deve cadastrar um pet corretamente
 ### /pets/:id
-- [] Deve retornar um pet existente
+- [x] Deve retornar um pet existente
 ### /adoptions
-- [] Deve ter o tamanho de itens padrão de 10 por página
+- [x] Deve ter o tamanho de itens padrão de 10 por página
