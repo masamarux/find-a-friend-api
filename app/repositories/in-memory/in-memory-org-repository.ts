@@ -27,6 +27,7 @@ export class InMemoryOrgRepository implements OrgRepository {
       created_at: new Date(),
       updated_at: new Date(),
       deleted_at: null,
+      role: data.role
     }
 
     this.orgs.push(org);

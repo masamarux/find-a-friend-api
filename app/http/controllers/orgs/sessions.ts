@@ -25,8 +25,9 @@ export async function signin(request: FastifyRequest, reply: FastifyReply) {
     })
 
     const token = await reply.jwtSign({
-      name: {
-        orgName: org.name,
+      org: {
+        id: org.id,
+        name: org.name,
       }
     }, {
       sign: {
@@ -35,8 +36,9 @@ export async function signin(request: FastifyRequest, reply: FastifyReply) {
     });
 
     const refreshToken = await reply.jwtSign({
-      name: {
-        orgName: org.name,
+      org: {
+        id: org.id,
+        name: org.name,
       }
     }, {
       sign: {

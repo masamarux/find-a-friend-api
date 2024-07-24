@@ -1,4 +1,4 @@
-import { Org as OrgModel, Prisma} from '@prisma/client';
+import { Org as OrgModel, Prisma, Role} from '@prisma/client';
 
 export type OrgCreateInput = {
   name: string
@@ -12,7 +12,8 @@ export type OrgCreateInput = {
     number: string
     state: string
     street: string
-  }
+  },
+  role: Role
 }
 
 export interface OrgRepository {

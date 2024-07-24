@@ -10,6 +10,7 @@ export interface Address {
 }
 
 export interface Pet {
+  orgId: string;
   name: string;
   about: string;
   age: number;

@@ -17,6 +17,7 @@ export async function signup(request: FastifyRequest, reply: FastifyReply) {
       }),
       telephone: z.string(),
       password: z.string(),
+      role: z.enum(['MEMBER', 'ADMIN']).optional(),
     })
 
     const result = signupOrgSchema.safeParse(request.body);

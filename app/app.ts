@@ -8,8 +8,10 @@ import { orgsRoutes } from './http/controllers/orgs/routes';
 import { petsRoutes } from './http/controllers/pets/routes';
 import { adoptionsRoutes } from './http/controllers/adoptions/routes';
 
+const isTestEnv = process.env.NODE_ENV === 'test';
+
 export const app = fastify({
-  logger: true
+  logger: !isTestEnv
 });
 
 app.register(fastifyCookie)
@@ -21,7 +23,8 @@ app.register(fastifyJwt, {
 app.register(fastifyMultiPart, {
   limits: {
     fileSize: 2 * 1000000 // 2MB
-  }
+  },
+  attachFieldsToBody: true
 })
 
 app.register(appRoutes)

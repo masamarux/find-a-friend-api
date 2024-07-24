@@ -41,6 +41,11 @@ enum ENVIRONMENT_SIZE {
   WIDE
 }
 
+enum Role {
+  ADMIN
+  MEMBER
+}
+
 model Org {
   id         String      @id @default(uuid())
   name       String
@@ -53,6 +58,7 @@ model Org {
   deleted_at DateTime?
   adoptions  Adoptions[]
   address    Address     @relation(fields: [address_id], references: [id])
+  role       Role        @default(MEMBER)
 
   @@map("orgs")
 }
@@ -118,7 +124,7 @@ model AdoptionRequirement {
 
 model PetImages {
   id     String @id @default(uuid())
-  pet_id String
+  pet_id String @unique
   key    String
   pet    Pet    @relation(fields: [pet_id], references: [id])
 

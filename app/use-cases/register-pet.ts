@@ -41,13 +41,16 @@ export class RegisterPetUseCase {
 
   async execute(data: RegisterPetUseCaseRequest): Promise<RegisterPetUseCaseResponse> {
     const images = []
-    for (const file of data.files) {
-      const key = `${crypto.randomUUID()}.png`;
-      await this.s3Service.storeImage(key, file);
-      images.push(key);
+    if(data.files.length > 0) {
+      for (const file of data.files) {
+        const key = `${crypto.randomUUID()}.png`;
+        await this.s3Service.storeImage(key, file);
+        images.push(key);
+      }
     }
 
     const pet = await this.petsRepository.create({
+      orgId: data.orgId,
       name: data.name,
       about: data.about,
       age: data.age,

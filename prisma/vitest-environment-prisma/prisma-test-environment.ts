@@ -19,7 +19,7 @@ function generateDatabaseURL(schema: string){
 }
 
 export default <Environment>{
-  name: 'custom',
+  name: 'prisma',
   transformMode: 'ssr',
   async setup() {
     const schema = randomUUID()

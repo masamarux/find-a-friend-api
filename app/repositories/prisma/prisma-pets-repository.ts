@@ -54,21 +54,32 @@ export class PrismaPetsRepository implements PetsRepository {
     return pets
   }
   async create(data: Pet) {
+    let pet_images = null
+    if(data.images.length < 0) {
+      pet_images = {
+        createMany: {
+          data: data.images.map(image => {
+            return {
+              key: image
+            }
+          })
+        }
+      }
+    }
     const pet = await prisma.pet.create({
       data: {
-        ...data,
+        name: data.name,
+        about: data.about,
+        age: data.age,
+        energy: data.energy,
+        environment_size: data.environment_size,
+        independency: data.independency,
+        size: data.size,
+        specie: data.specie,
         address: {
           create: data.address
         },
-        pet_images: {
-          createMany: {
-            data: data.images.map(key => {
-              return {
-                key
-              }
-            })
-          }
-        }
+        pet_images: pet_images ? pet_images : undefined,
       },
       include: {
         address: true,

@@ -12,7 +12,7 @@
 - [x] Um pet deve estar ligado a uma ORG
 - [x] O usuário que quer adotar, entrará em contato com a ORG via WhatsApp
 - [x] Todos os filtros, além da cidade, são opcionais
-- [] Para uma ORG acessar a aplicação como admin, ela precisa estar logada // ligar com o rbca
+- [x] Para uma ORG acessar a aplicação como admin, ela precisa estar logada
 - [x] Fotos dos pets devem ser guardadas num serviço de cdn
 
 ## Requisitos não funcionais
@@ -50,11 +50,11 @@
 ### /health
 - [x] Deve retornar status ok
 ### /orgs/signup
-- [X] Deve cadastrar uma ORG, retornar 201 e dados não sensíveis
+- [x] Deve cadastrar uma ORG, retornar 201 e dados não sensíveis
 ### /orgs/sessions
-- [] Deve retornar um jwt corretamente
+- [x] Deve retornar um token corretamente
 ### /pets
-- [] Deve cadastrar um pet corretamente
+- [x] Deve cadastrar um pet corretamente
 ### /pets/:id
 - [] Deve retornar um pet existente
 ### /adoptions

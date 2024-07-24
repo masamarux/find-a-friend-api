@@ -33,7 +33,8 @@ describe('Signin Organization', () => {
     await orgRepository.create({ 
       ...org,
       password: await hash(org.password, env.CRYPTO_SALT),
-      address
+      address,
+      role: 'ADMIN'
     })
 
     const response = await sut.execute({
@@ -75,7 +76,8 @@ describe('Signin Organization', () => {
     await orgRepository.create({ 
       ...org,
       password: await hash(org.password, env.CRYPTO_SALT),
-      address
+      address,
+      role: 'ADMIN'
     })
 
     await expect(

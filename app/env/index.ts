@@ -10,6 +10,7 @@ const envSchema = z.object({
   DB_DATABASE: z.string(),
   DB_HOST: z.string(),
   DB_PORT: z.coerce.number(),
+  DATABASE_URL: z.string(),
   JWT_SECRET: z.string(),
   AWS_ACCESS_KEY: z.string(),
   AWS_SECRET_KEY: z.string(),
